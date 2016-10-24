@@ -1,10 +1,14 @@
-searchUrbanDict = function(word){
+searchJira = function(word){
   var query = word.selectionText;
-  chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
+  var baseUrl =  localStorage['baseUrl'];
+  var searchSuffix = localStorage['searchSuffix'];
+  console.log(baseUrl+searchSuffix);
+  chrome.tabs.create({url: baseUrl + searchSuffix + query});
 };
 
-chrome.contextMenus.create({
-  title: "Search in UrbanDictionary",
-  contexts:["selection"],
-  onclick: searchUrbanDict
-});
+  	chrome.contextMenus.create({
+		id:"jirasearch",
+		title: "Search JIRA",
+		contexts:["selection"],
+		onclick: searchJira
+    });
