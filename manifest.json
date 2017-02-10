@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Jira Search",
-  "short_name": "Search",
+  "name": "Jira Search Tool",
+  "short_name": "Jira Search",
   "description": "Searches for the selected text in JIRA",
   "version": "0.1.0",
   "minimum_chrome_version": "38",
