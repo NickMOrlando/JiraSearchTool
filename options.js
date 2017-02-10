@@ -1,3 +1,16 @@
+var gaAccount = 'UA-XXXXXXXX-X';
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', gaAccount]);
+_gaq.push(['_trackPageview']);
+
+
 function save_options() {
 	var searchUrl = document.getElementById('searchUrl').value;
 	var suffix = document.getElementById('searchSuffix').value;
@@ -30,7 +43,7 @@ function restore_options() {
 	
 	// Update status to let user know options were saved.
 	var status = document.getElementById('status');
-	status.textContent = 'Options loaded.';
+	status.textContent = displayText;
 	setTimeout(function() {
 		status.textContent = '';
 	}, 750);
