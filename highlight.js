@@ -11,7 +11,7 @@ _gaq.push(['_setAccount', gaAccount]);
 _gaq.push(['_trackPageview']);
 
 //Universal Jira ticket regexp
-var jira_regex = /(?:\s|^)([A-Z]+-[0-9]+)(?=\s|$)/
+var jira_regex = /(?:\(|\s|^)([A-Z]+-[0-9]+)(?=\s*|\)|$)/
 
 
 ////based on http://jsfiddle.net/7Vf5J/38/
