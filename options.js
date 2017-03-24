@@ -34,7 +34,7 @@ function save_options() {
 function restore_options() {
 	// Use default value
 	if (localStorage['baseUrl'] == undefined){
-		localStorage['baseUrl'] = 'http://my-search-url/';
+		localStorage['baseUrl'] = 'http://my-jira-url/';
 	}
 	if(localStorage['searchSuffix'] == undefined){
 		localStorage['searchSuffix'] = 'secure/QuickSearch.jspa?searchString=';

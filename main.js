@@ -26,5 +26,3 @@ chrome.runtime.onInstalled.addListener(function() {
 		onclick: searchJira
     });
 });
-
-	

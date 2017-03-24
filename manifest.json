@@ -3,11 +3,12 @@
   "name": "Jira Search Tool",
   "short_name": "Jira Search",
   "description": "Searches for the selected text in JIRA",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "minimum_chrome_version": "38",
   "permissions": [
     "contextMenus", 
     "tabs",
+	"*://*/*",
 	"https://www.google-analytics.com/",
 	"storage"],
  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
@@ -15,5 +16,12 @@
     "16": "assets/search.png"
   },
   "background": {"page": "background.html"} ,
-  "options_page": "options.html"    
+  "options_page": "options.html",    
+  "content_scripts": 
+	[
+		{
+			"matches": ["*://*/*"],
+			"js": ["highlight.js"]
+		}
+	]
 }
