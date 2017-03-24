@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Jira Link and Search",
   "short_name": "Jira Link-Search",
-  "description": "Converts JIRA ticket numbers in browser to hyperlinks, and provides a right-click menu to search for any highlighted text within Atlassian Jira.",
+  "description": "Turns JIRA numbers into hyperlinks, and provides a right-click menu to search for any highlighted text within Atlassian Jira.",
   "version": "0.2.0",
   "minimum_chrome_version": "38",
   "permissions": [
