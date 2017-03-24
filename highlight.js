@@ -58,7 +58,7 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
 // This function does the surrounding for every matched piece of text
 function createAnchor(matchedTextNode) {
     var el = document.createElement("a");
-	var redirectUrl = chrome.extension.getURL("background.html")+"?jira="+matchedTextNode.nodeValue;
+	var redirectUrl = chrome.extension.getURL("background.html")+"?jira="+matchedTextNode.nodeValue.trim();
     el.setAttribute('href', redirectUrl);
     el.appendChild(matchedTextNode);
     return el;
