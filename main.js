@@ -26,3 +26,35 @@ chrome.runtime.onInstalled.addListener(function() {
 		onclick: searchJira
     });
 });
+
+
+//redirection
+ 
+var getQueryString = function ( field, url ) {
+    var href = url ? url : window.location.href;
+    var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+    var string = reg.exec(href);
+    return string ? string[1] : null;
+};
+
+function redirect(){
+	var jira = getQueryString('jira');
+	if(jira){
+		try{
+			chrome.storage.sync.get('baseUrl', function(items) {
+			var baseurl, browseurl;
+			baseurl = items['baseUrl'] || chrome.extension.getURL("options.html")+"?";
+			  browseurl = baseurl+'browse/';
+			_gaq.push(['_trackEvent','clickLinkToJira','success']);  
+			_gaq.push(function(){ 
+				window.location.href = browseurl+jira;
+				});
+			});
+		} catch(ex) {
+			_gaq.push(['_trackEvent','clickLinkToJira','failure']);  	
+		}
+	}else{
+			_gaq.push(['_trackEvent','backgroundInitialized','success']);  	
+	}
+}
+document.addEventListener('DOMContentLoaded', redirect);

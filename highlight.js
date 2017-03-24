@@ -10,12 +10,6 @@ var _gaq = _gaq || [];
 _gaq.push(['_setAccount', gaAccount]);
 _gaq.push(['_trackPageview']);
 
-var baseUrl, browseUrl;
- chrome.storage.sync.get('baseUrl', function(items) {
-      baseUrl = items['baseUrl'] || chrome.extension.getURL("options.html")+"?";
-	  browseUrl = baseUrl+'browse/';
- });
-
 //Universal Jira ticket regexp
 var jira_regex = /(?:\s|^)([A-Z]+-[0-9]+)(?=\s|$)/
 
@@ -64,7 +58,8 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
 // This function does the surrounding for every matched piece of text
 function createAnchor(matchedTextNode) {
     var el = document.createElement("a");
-    el.setAttribute('href', browseUrl+matchedTextNode.nodeValue);
+	var redirectUrl = chrome.extension.getURL("background.html")+"?jira="+matchedTextNode.nodeValue;
+    el.setAttribute('href', redirectUrl);
     el.appendChild(matchedTextNode);
     return el;
 }
@@ -78,7 +73,7 @@ function wrapJiraTickets(container) {
 	wrapJiraTickets(document.body);
 });
 
-//then reset any links that may have been removed at 5 second intervals (e.g. Gmail)
+//then add any links that may have been added at 1 second intervals (e.g. from Gmail navigation or new inbound messages)
 setInterval(function(){
 	wrapJiraTickets(document.body);	
 },1000);

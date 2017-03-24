@@ -3,7 +3,7 @@
   "name": "Jira Search Tool",
   "short_name": "Jira Search",
   "description": "Searches for the selected text in JIRA",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "minimum_chrome_version": "38",
   "permissions": [
     "contextMenus", 
@@ -16,7 +16,7 @@
     "16": "assets/search.png"
   },
   "background": {"page": "background.html"} ,
-  "options_page": "options.html",    
+  "options_page": "options.html",
   "content_scripts": 
 	[
 		{
