@@ -14,11 +14,13 @@ _gaq.push(['_trackPageview']);
 function save_options() {
 	var searchUrl = document.getElementById('searchUrl').value;
 	var suffix = document.getElementById('searchSuffix').value;
+	var projects = document.getElementById('jiraProjects').value;
 	console.log(searchUrl);
 	console.log(suffix);
   
 	localStorage['baseUrl'] = searchUrl;
 	localStorage['searchSuffix'] = suffix;
+	localStorage['jiraProjects'] = projects;
 	
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -37,13 +39,16 @@ function restore_options() {
 	if(localStorage['searchSuffix'] == undefined){
 		localStorage['searchSuffix'] = 'secure/QuickSearch.jspa?searchString=';
 	}
+	if(localStorage['jiraProjects'] == undefined){
+		localStorage['jiraProjects'] = 'ABC, DEF';
+	}
 	
 	document.getElementById('searchUrl').value = localStorage['baseUrl'];
 	document.getElementById('searchSuffix').value = localStorage['searchSuffix'];
-	
+	document.getElementById('jiraProjects').value = localStorage['jiraProjects'];
 	// Update status to let user know options were saved.
 	var status = document.getElementById('status');
-	status.textContent = displayText;
+	status.textContent = 'Options loaded successfully.';
 	setTimeout(function() {
 		status.textContent = '';
 	}, 750);
