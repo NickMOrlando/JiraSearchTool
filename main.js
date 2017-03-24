@@ -18,12 +18,13 @@ searchJira = function(word){
   chrome.tabs.create({url: baseUrl + searchSuffix + query});
   _gaq.push(['_trackEvent','searchJira','success']);  
 };
-
+chrome.runtime.onInstalled.addListener(function() {
   	chrome.contextMenus.create({
 		id:"jirasearch",
 		title: "Search JIRA",
 		contexts:["selection"],
 		onclick: searchJira
     });
+});
 
 	
