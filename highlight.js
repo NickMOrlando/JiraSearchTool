@@ -1,9 +1,14 @@
-//based on http://jsfiddle.net/7Vf5J/38/
-
-var baseUrl = "http://jira.tmwsystems.com/browse/"
+var baseUrl, browseUrl;
+ chrome.storage.sync.get('baseUrl', function(items) {
+      baseUrl = items['baseUrl'] || chrome.extension.getURL("options.html")+"?";
+	  browseUrl = baseUrl+'browse/';
+ });
 
 //Universal Jira ticket regexp
 var jira_regex = /(?:\s|^)([A-Z]+-[0-9]+)(?=\s|$)/
+
+
+////based on http://jsfiddle.net/7Vf5J/38/
 
 // Reusable generic function
 function surroundInElement(el, regex, surrounderCreateFunc) {
@@ -27,6 +32,9 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
 	var result, surroundingNode, matchedTextNode, matchLength, matchedText;
     while ( textNode && (result = regex.exec(textNode.data))) {
     		textNode.data = textNode.data;
+		if(parent.nodeName=="A"){
+			return;
+		}
         matchedTextNode = textNode.splitText(result.index);
         matchedText = result[0];
         matchLength = matchedText.length;
@@ -35,9 +43,7 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
         // Ensure searching starts at the beginning of the text node
         regex.lastIndex = 0;
         surroundingNode = surrounderCreateFunc(matchedTextNode.cloneNode(true));
-		if(parent.nodeName=="A"){
-			return;
-		}
+
         parent.insertBefore(surroundingNode, matchedTextNode);
         parent.removeChild(matchedTextNode);
     }
@@ -46,7 +52,7 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
 // This function does the surrounding for every matched piece of text
 function createAnchor(matchedTextNode) {
     var el = document.createElement("a");
-    el.setAttribute('href', baseUrl+matchedTextNode.nodeValue);
+    el.setAttribute('href', browseUrl+matchedTextNode.nodeValue);
     el.appendChild(matchedTextNode);
     return el;
 }
