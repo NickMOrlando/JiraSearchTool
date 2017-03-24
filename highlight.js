@@ -24,7 +24,7 @@ function surroundInElement(el, regex, surrounderCreateFunc) {
 // Reusable generic function
 function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
     var parent = textNode.parentNode;
-    var result, surroundingNode, matchedTextNode, matchLength, matchedText;
+	var result, surroundingNode, matchedTextNode, matchLength, matchedText;
     while ( textNode && (result = regex.exec(textNode.data))) {
     		textNode.data = textNode.data;
         matchedTextNode = textNode.splitText(result.index);
@@ -35,6 +35,9 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
         // Ensure searching starts at the beginning of the text node
         regex.lastIndex = 0;
         surroundingNode = surrounderCreateFunc(matchedTextNode.cloneNode(true));
+		if(parent.nodeName=="A"){
+			return;
+		}
         parent.insertBefore(surroundingNode, matchedTextNode);
         parent.removeChild(matchedTextNode);
     }
@@ -42,7 +45,6 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
 
 // This function does the surrounding for every matched piece of text
 function createAnchor(matchedTextNode) {
-	console.log(matchedTextNode.data);
     var el = document.createElement("a");
     el.setAttribute('href', baseUrl+matchedTextNode.nodeValue);
     el.appendChild(matchedTextNode);
