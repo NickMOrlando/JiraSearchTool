@@ -1,3 +1,15 @@
+var gaAccount = 'UA-XXXXXXXX-X';
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', gaAccount]);
+_gaq.push(['_trackPageview']);
+
 var baseUrl, browseUrl;
  chrome.storage.sync.get('baseUrl', function(items) {
       baseUrl = items['baseUrl'] || chrome.extension.getURL("options.html")+"?";
@@ -43,9 +55,9 @@ function surroundMatchingText(textNode, regex, surrounderCreateFunc) {
         // Ensure searching starts at the beginning of the text node
         regex.lastIndex = 0;
         surroundingNode = surrounderCreateFunc(matchedTextNode.cloneNode(true));
-
         parent.insertBefore(surroundingNode, matchedTextNode);
         parent.removeChild(matchedTextNode);
+		_gaq.push(['_trackEvent','addLinkToJira','success']);  
     }
 }
 

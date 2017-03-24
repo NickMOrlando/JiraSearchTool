@@ -19,7 +19,9 @@ function save_options() {
   
 	// localStorage['baseUrl'] = searchUrl;
 	// localStorage['searchSuffix'] = suffix;
-	 chrome.storage.sync.set({'baseUrl': searchUrl, 'searchSuffix': suffix	}, function() {      
+	 chrome.storage.sync.set({'baseUrl': searchUrl, 'searchSuffix': suffix	}, function() {    
+		
+		_gaq.push(['_trackEvent','saveOptions','success']);  
 		// Update status to let user know options were saved.
 		var status = document.getElementById('status');
 		status.textContent = 'Options saved.';
@@ -35,12 +37,14 @@ function restore_options() {
 		document.getElementById('searchUrl').value = items['baseUrl'] || 'http://my-jira-url/';
 		document.getElementById('searchSuffix').value = items['searchSuffix'] || 'secure/QuickSearch.jspa?searchString=';	
 		
-		// Update status to let user know options were saved.
+		// Update status to let user know options were loaded.
+		_gaq.push(['_trackEvent','loadOptions','success']);  
 		var status = document.getElementById('status');
 		if (items['baseUrl']){
 			status.textContent = 'Options loaded successfully.';
 		}else{
 			status.textContent = 'A Jira server URL is required.';
+			_gaq.push(['_trackEvent','firstTimeLoad','success']);  
 		}
 		setTimeout(function() {
 			status.textContent = '';

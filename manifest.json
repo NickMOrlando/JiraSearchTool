@@ -3,7 +3,7 @@
   "name": "Jira Search Tool",
   "short_name": "Jira Search",
   "description": "Searches for the selected text in JIRA",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "minimum_chrome_version": "38",
   "permissions": [
     "contextMenus", 
@@ -21,7 +21,8 @@
 	[
 		{
 			"matches": ["*://*/*"],
-			"js": ["highlight.js"]
+			"js": ["highlight.js","activate-ga.js"]
 		}
-	]
+	],	
+  "web_accessible_resources": ["ga.js"]
 }
