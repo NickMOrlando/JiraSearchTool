@@ -12,10 +12,12 @@ _gaq.push(['_trackPageview']);
 
 searchJira = function(word){
   var query = word.selectionText;
-  var baseUrl =  localStorage['baseUrl'] || '/options.html?'; //redirect to options if not provided
-  var searchSuffix = localStorage['searchSuffix'];
-  console.log(baseUrl+searchSuffix);
-  chrome.tabs.create({url: baseUrl + searchSuffix + query});
+  chrome.storage.sync.get(['baseUrl', 'searchSuffix'], function(items) {
+	var baseUrl =  items['baseUrl'] || '/options.html?'; //redirect to options if not provided
+	var searchSuffix = items['searchSuffix'];
+	console.log(baseUrl+searchSuffix);
+	chrome.tabs.create({url: baseUrl + searchSuffix + query});
+  });
   _gaq.push(['_trackEvent','searchJira','success']);  
 };
 chrome.runtime.onInstalled.addListener(function() {
