@@ -25,5 +25,5 @@
 			"js": ["highlight.js","activate-ga.js"]
 		}
 	],	
-  "web_accessible_resources": ["ga.js"]
+  "web_accessible_resources": ["ga.js","background.html"]
 }
