@@ -43,6 +43,8 @@ function redirect(){
 	var jira = getQueryString('jira');
 	if(jira){
 		try{
+			//Quick-Fixes #1 (eliminate any parens from the Jira string)
+			jira = jira.replace(/[()]/g, '');
 			chrome.storage.sync.get('baseUrl', function(items) {
 			var baseurl, browseurl;
 			baseurl = items['baseUrl'] || chrome.extension.getURL("options.html")+"?";
